@@ -83,9 +83,11 @@ while True:
                         "code_no": 501 # User not registered
                     }
                 else: # Command Execute Success!
+                    userlist.remove(username)
+                    
                     json_data = {
                         "command": "ret_code",
-                        "code_no": 401 # User not accepted
+                        "code_no": 401 # Command accepted
                     }         
         # Unknown Command
         else: 
