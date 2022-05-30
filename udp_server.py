@@ -94,7 +94,7 @@ while True:
                 "username": 301 # Command unknown
             }
         # TODO format return code as json
-        response = json.dummps(json_data)
+        response = json.dumps(json_data)
         
     #echo back received data from connecting client
         sent = sock.sendto(bytes(response,"utf-8"), address)
