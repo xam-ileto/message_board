@@ -38,7 +38,9 @@ try:
     # waiting for server to send data back, this is blocking function
     print ('waiting to receive')
     data, server = sock.recvfrom(1024)
-    print ('received "%s"' % data.decode("utf-8")) 
+    
+    json_obj = json.loads(data)
+    print(json_obj('message').get('command'))
     
     # TODO print server echo
 finally:
