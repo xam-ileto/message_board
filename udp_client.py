@@ -39,10 +39,9 @@ try:
     print ('waiting to receive')
     data, server = sock.recvfrom(1024)
     
+    # TODO print server echo
     json_obj = json.loads(data)
     print(json_obj)
-    
-    # TODO print server echo
 finally:
     #close socket
     print ('closing socket')
