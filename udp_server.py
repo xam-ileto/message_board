@@ -1,14 +1,13 @@
 import socket
 import json
 
-#Set variables for listening address and listening port
-listening_address='172.16.0.20' #Put in the IP address of server CSNET01
-listening_port=8009 #Put in the assigned port address 7
+listening_address='172.16.0.20' #IP address of the server CSNET01
+listening_port=8009 #Assigned port number
 
 # Create a UDP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
 
-# Bind the socket to the port
+# Bind the socket to port
 print ("starting up on %s port %d" %(listening_address, listening_port))
 sock.bind((listening_address, listening_port)) 
 
