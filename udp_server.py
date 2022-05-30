@@ -36,17 +36,17 @@ while True:
             if (username == "" or user_msg == ""): # Inputs may be empty
                 json_data = {
                     "command": "ret_code",
-                    "username": 201 # Command parameters incomplete
+                    "code_no": 201 # Command parameters incomplete
                 } 
             elif (userlist.count(username) == 0): # User does not exist
                  json_data = {
                     "command": "ret_code",
-                    "username": 501 # User not registered
+                    "code_no": 501 # User not registered
                 }
             else: # Command Execute Success!
                  json_data = {
                     "command": "ret_code",
-                    "username": 401 # User not accepted
+                    "code_no": 401 # User not accepted
                 }                    
             
         # For register commands
@@ -58,40 +58,40 @@ while True:
                 if (username == ""): # Input may be empty
                     json_data = {
                         "command": "ret_code",
-                        "username": 201 # Command parameters incomplete
+                        "code_no": 201 # Command parameters incomplete
                     } 
                 elif (userlist.count(username) == 1): # User already exists
                     json_data = {
                         "command": "ret_code",
-                        "username": 502 # User account exists
+                        "code_no": 502 # User account exists
                     }
                 else: # Command Execute Success!
                     json_data = {
                         "command": "ret_code",
-                        "username": 401 # User not accepted
+                        "code_no": 401 # User not accepted
                     }  
             else: # (cmd == "deregister")
                 if (username == ""): # Input may be empty
                     json_data = {
                         "command": "ret_code",
-                        "username": 201 # Command parameters incomplete
+                        "code_no": 201 # Command parameters incomplete
                     } 
                 elif (userlist.count(username) == 0): # User does not exist
                     json_data = {
                         "command": "ret_code",
-                        "username": 501 # User not registered
+                        "code_no": 501 # User not registered
                     }
                 else: # Command Execute Success!
                     json_data = {
                         "command": "ret_code",
-                        "username": 401 # User not accepted
+                        "code_no": 401 # User not accepted
                     }         
         # Unknown Command
         else: 
             print ("unknown command") 
             json_data = {
                 "command": "ret_code",
-                "username": 301 # Command unknown
+                "code_no": 301 # Command unknown
             }
         # TODO format return code as json
         response = json.dumps(json_data)
