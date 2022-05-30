@@ -40,7 +40,7 @@ try:
     data, server = sock.recvfrom(1024)
     
     json_obj = json.loads(data)
-    print(json_obj('message').get('command'))
+    print(json_obj)
     
     # TODO print server echo
 finally:
