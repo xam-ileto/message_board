@@ -39,10 +39,9 @@ try:
     print ('waiting to receive')
     data, server = sock.recvfrom(1024)
     
-    json_obj = json.loads(data)
-    print(json_obj('message').get('command'))
-    
     # TODO print server echo
+    json_obj = json.loads(data)
+    print(json_obj)
 finally:
     #close socket
     print ('closing socket')

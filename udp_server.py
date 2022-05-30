@@ -23,15 +23,16 @@ while True:
     print (data.decode("utf-8")) 
     
     json_obj = json.loads(data)
-    cmd = json_obj('message').get('command')
+    command = json_obj["command"]
+    username = json_obj["username"]
+    user_msg = json_obj["message"]
+    
 
     if data:
         # TODO if statements for return codes
         # For register commands
-        if (cmd == "msg"):
+        if (command == "msg"):
             print ("message command")         
-            username = json_obj('message').get('username')
-            user_msg = json_obj('message').get('message')
             
             if (username == "" or user_msg == ""): # Inputs may be empty
                 json_data = {
@@ -50,11 +51,11 @@ while True:
                 }                    
             
         # For register commands
-        elif (cmd == "register" or cmd == "deregister"): 
+        elif (command == "register" or command == "deregister"): 
             print ("de/register command") 
             username = json_obj('message').get('username')
            
-            if (cmd == "register"):
+            if (command == "register"):
                 if (username == ""): # Input may be empty
                     json_data = {
                         "command": "ret_code",
