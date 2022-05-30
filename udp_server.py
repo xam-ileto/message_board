@@ -38,12 +38,12 @@ while True:
                     "command": "ret_code",
                     "username": 201 # Command parameters incomplete
                 } 
-            elif (userlist.count(username) == 0) # User does not exist
+            elif (userlist.count(username) == 0): # User does not exist
                  json_data = {
                     "command": "ret_code",
                     "username": 501 # User not registered
                 }
-            else # Command Execute Success!
+            else: # Command Execute Success!
                  json_data = {
                     "command": "ret_code",
                     "username": 401 # User not accepted
@@ -60,28 +60,28 @@ while True:
                         "command": "ret_code",
                         "username": 201 # Command parameters incomplete
                     } 
-                elif (userlist.count(username) == 1) # User already exists
+                elif (userlist.count(username) == 1): # User already exists
                     json_data = {
                         "command": "ret_code",
                         "username": 502 # User account exists
                     }
-                else # Command Execute Success!
+                else: # Command Execute Success!
                     json_data = {
                         "command": "ret_code",
                         "username": 401 # User not accepted
                     }  
-            else # (cmd == "deregister")
+            else: # (cmd == "deregister")
                 if (username == ""): # Input may be empty
                     json_data = {
                         "command": "ret_code",
                         "username": 201 # Command parameters incomplete
                     } 
-                elif (userlist.count(username) == 0) # User does not exist
+                elif (userlist.count(username) == 0): # User does not exist
                     json_data = {
                         "command": "ret_code",
                         "username": 501 # User not registered
                     }
-                else # Command Execute Success!
+                else: # Command Execute Success!
                     json_data = {
                         "command": "ret_code",
                         "username": 401 # User not accepted
