@@ -15,23 +15,19 @@ sock.bind((listening_address, listening_port))
 userlist = [] # Store usernames
 
 while True:
-    #waiting for data to arrive, this is a blocking function
-    print ('\nwaiting to receive message')
     data, address = sock.recvfrom(1024) 
-
-    print ('received %s bytes from %s' % (len(data), address))
-    print (data.decode("utf-8")) 
+    print("waiting to receive message")
     
-    json_obj = json.loads(data)
-    command = json_obj["command"]
-    username = json_obj["username"]
+    json_obj = json.loads(data)     # object that gets the client data 
+    command = json_obj["command"]   # gets client command
+    username = json_obj["username"] # gets client username
+
+    if (bool(userlist)):
+        print("Users in message board:",userlist)
 
     if data:
-        # TODO if statements for return codes
-        # For register commands
+        # For message commands
         if (command == "msg"):
-            print ("message command")  
-            
             user_msg = json_obj["message"]       
             
             if (username == "" or user_msg == ""): # Inputs may be empty
@@ -45,15 +41,17 @@ while True:
                     "code_no": 501 # User not registered
                 }
             else: # Command Execute Success!
+                print("User")
+                print(username)
+                print("exiting...")
+                
                  json_data = {
                     "command": "ret_code",
                     "code_no": 401 # User not accepted
                 }                    
             
-        # For register commands
-        elif (command == "register" or command == "deregister"): 
-            print ("de/register command") 
-           
+        # For register and deregister commands
+        elif (command == "register" or command == "deregister"):
             if (command == "register"):
                 if (username == ""): # Input may be empty
                     json_data = {
@@ -84,21 +82,20 @@ while True:
                     }
                 else: # Command Execute Success!
                     userlist.remove(username)
-                    
+
                     json_data = {
                         "command": "ret_code",
                         "code_no": 401 # Command accepted
                     }         
         # Unknown Command
         else: 
-            print ("unknown command") 
             json_data = {
                 "command": "ret_code",
                 "code_no": 301 # Command unknown
             }
-        # TODO format return code as json
+
         response = json.dumps(json_data)
         
-    #echo back received data from connecting client
+        #echo back received data from connecting client
         sent = sock.sendto(bytes(response,"utf-8"), address)
         print ('sent %s bytes back to %s' % (sent, address))
