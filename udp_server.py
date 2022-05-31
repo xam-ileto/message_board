@@ -21,10 +21,12 @@ while True:
     command = json_obj["command"]   # gets client command
     username = json_obj["username"] # gets client username
 
-    if (bool(userlist)):
+    if (len(userlist) > 0):
         print("Users in message board:",userlist)
 
     if data:
+        # TODO delete
+        print(json_obj)
         # For message commands
         if (command == "msg"):
             user_msg = json_obj["message"]       
@@ -44,7 +46,7 @@ while True:
                 print(username)
                 print("exiting...")
                 
-                 json_data = {
+                json_data = {
                     "command": "ret_code",
                     "code_no": 401 # User not accepted
                 }                    
@@ -97,4 +99,3 @@ while True:
         
         #echo back received data from connecting client
         sent = sock.sendto(bytes(response,"utf-8"), address)
-        print ('sent %s bytes back to %s' % (sent, address))
