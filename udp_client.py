@@ -26,12 +26,36 @@ def print_output(command, ret_code):
         print("Unsuccessful registration. Exiting...")
     
 
-try:
-    server_host = input("Enter IP address of message board server: ")
-    
+
+server_host = input("Enter IP address of message board server: ")
+
+username = input("Enter preferred username: ")
+
+# REGISTER USER
+json_initial1 = {
+        "command": "register",
+        "username": username
+    }
+
+json_sent1 = json.dumps(json_initial1)
+
+# send data to server
+sent = sock.sendto(bytes(json_sent1,"utf-8"), (server_host,dest_port))
+
+# receive server response
+data, server = sock.recvfrom(1024)
+json_returned1 = json.loads(data)
+ret_code = json_returned1["code_no"]
+
+# TODO delete
+print(json_returned1)
+print_output(json_initial1["command"], json_returned1["code_no"])
+
+# repeat while unregistered
+while (ret_code != 401):
     username = input("Enter preferred username: ")
-    
-    # REGISTER USER
+
+    # register again
     json_initial1 = {
             "command": "register",
             "username": username
@@ -45,78 +69,52 @@ try:
     # receive server response
     data, server = sock.recvfrom(1024)
     json_returned1 = json.loads(data)
-    ret_code = json_returned1["code_no"]
+    ret_code = json_returned1["ret_code"]
     
-    # TODO delete
-    print(json_returned1)
     print_output(json_initial1["command"], json_returned1["code_no"])
+
+
+# SEND MSG/ DEREGISTER USER
+msg = input("Enter message: ")
+
+while(msg != "bye"): # keep posting messages
+    json_initial2 = {
+        "command": "msg",
+        "username": username,
+        "message": msg # contains additional message
+    }
     
-    # repeat while unregistered
-    while (ret_code != 401):
-        username = input("Enter preferred username: ")
-    
-        # register again
-        json_initial1 = {
-                "command": "register",
-                "username": username
-            }
-        
-        json_sent1 = json.dumps(json_initial1)
-        
-        # send data to server
-        sent = sock.sendto(bytes(json_sent1,"utf-8"), (server_host,dest_port))
-        
-        # receive server response
-        data, server = sock.recvfrom(1024)
-        json_returned1 = json.loads(data)
-        ret_code = json_returned1["ret_code"]
-        
-        print_output(json_initial1["command"], json_returned1["code_no"])
-    
-    
-    # SEND MSG/ DEREGISTER USER
-    msg = input("Enter message: ")
-    
-    while(msg != "bye"): # keep posting messages
-        json_initial2 = {
-            "command": "msg",
-            "username": username,
-            "message": msg # contains additional message
-        }
-        
-        json_sent2 = json.dumps(json_initial2)
-    
-        # send data to server
-        sent = sock.sendto(bytes(json_sent2,"utf-8"), (server_host,dest_port))
-        
-        data, server = sock.recvfrom(1024)
-        json_returned2 = json.loads(data)
-    
-        # TODO delete
-        print(json_returned2)
-        print_output(json_initial2["command"], json_returned2["code_no"])
-        
-        msg = input("Enter message: ")
-    
-    # DEREGISTER
-    json_initial3 = {
-            "command": "deregister",
-            "username": username,
-        }
-        
-    json_sent3 = json.dumps(json_initial3)
-    
+    json_sent2 = json.dumps(json_initial2)
+
     # send data to server
-    sent = sock.sendto(bytes(json_sent3,"utf-8"), (server_host,dest_port))
+    sent = sock.sendto(bytes(json_sent2,"utf-8"), (server_host,dest_port))
     
     data, server = sock.recvfrom(1024)
-    json_returned3 = json.loads(data)
-    
+    json_returned2 = json.loads(data)
+
     # TODO delete
-    print(json_returned3)
-    print_output(json_initial3["command"], json_returned3["code_no"])
+    print(json_returned2)
+    print_output(json_initial2["command"], json_returned2["code_no"])
+    
+    msg = input("Enter message: ")
+
+# DEREGISTER
+json_initial3 = {
+        "command": "deregister",
+        "username": username,
+    }
+    
+json_sent3 = json.dumps(json_initial3)
+
+# send data to server
+sent = sock.sendto(bytes(json_sent3,"utf-8"), (server_host,dest_port))
+
+data, server = sock.recvfrom(1024)
+json_returned3 = json.loads(data)
+
+# TODO delete
+print(json_returned3)
+print_output(json_initial3["command"], json_returned3["code_no"])
         
-finally:
-    #close socket
-    print ('closing socket')
+
 sock.close()

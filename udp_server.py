@@ -42,13 +42,12 @@ while True:
                     "code_no": 501 # User not registered
                 }
             else: # Command Execute Success!
-                print("User")
-                print(username)
-                print("exiting...")
+
+                print("from " + username + " : " + user_msg)
                 
                 json_data = {
                     "command": "ret_code",
-                    "code_no": 401 # User not accepted
+                    "code_no": 401 # Command accepted
                 }                    
             
         # For register and deregister commands
@@ -66,6 +65,10 @@ while True:
                     }
                 else: # Command Execute Success!
                     userlist.append(username)
+                    
+                    print("Users in message board: ", end="")
+                    print(userlist)
+                    
                     json_data = {
                         "command": "ret_code",
                         "code_no": 401 # Command accepted
@@ -84,6 +87,10 @@ while True:
                 else: # Command Execute Success!
                     userlist.remove(username)
 
+                    print("User " + username + " exiting...")
+                    print("Users in message board: ", end="")
+                    print(userlist)
+                    
                     json_data = {
                         "command": "ret_code",
                         "code_no": 401 # Command accepted
