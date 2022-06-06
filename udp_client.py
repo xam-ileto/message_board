@@ -1,5 +1,6 @@
 import socket
 import json
+from sys import exit
 
 # server_host='172.16.0.20' #IP address of the server CSNET01
 dest_port=8009 #Assigned port number
@@ -51,27 +52,31 @@ ret_code = json_returned1["code_no"]
 print(json_returned1)
 print_output(json_initial1["command"], json_returned1["code_no"])
 
-# repeat while unregistered
-while (ret_code != 401):
-    username = input("Enter preferred username: ")
+# exit program if register was unsuccessful
+if (ret_code != 401):
+    exit(0)
 
-    # register again
-    json_initial1 = {
-            "command": "register",
-            "username": username
-        }
+# repeat while unregistered
+# while (ret_code != 401):
+#     username = input("Enter preferred username: ")
+
+#     # register again
+#     json_initial1 = {
+#             "command": "register",
+#             "username": username
+#         }
     
-    json_sent1 = json.dumps(json_initial1)
+#     json_sent1 = json.dumps(json_initial1)
     
-    # send data to server
-    sent = sock.sendto(bytes(json_sent1,"utf-8"), (server_host,dest_port))
+#     # send data to server
+#     sent = sock.sendto(bytes(json_sent1,"utf-8"), (server_host,dest_port))
     
-    # receive server response
-    data, server = sock.recvfrom(1024)
-    json_returned1 = json.loads(data)
-    ret_code = json_returned1["code_no"]
+#     # receive server response
+#     data, server = sock.recvfrom(1024)
+#     json_returned1 = json.loads(data)
+#     ret_code = json_returned1["code_no"]
     
-    print_output(json_initial1["command"], json_returned1["code_no"])
+#     print_output(json_initial1["command"], json_returned1["code_no"])
 
 
 # SEND MSG/ DEREGISTER USER
