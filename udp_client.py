@@ -69,7 +69,7 @@ while (ret_code != 401):
     # receive server response
     data, server = sock.recvfrom(1024)
     json_returned1 = json.loads(data)
-    ret_code = json_returned1["ret_code"]
+    ret_code = json_returned1["code_no"]
     
     print_output(json_initial1["command"], json_returned1["code_no"])
 
