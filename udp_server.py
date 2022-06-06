@@ -13,13 +13,16 @@ sock.bind((listening_address, listening_port))
 
 userlist = [] # Store usernames
 print("waiting to receive message")
-
+    
 while True:
     data, address = sock.recvfrom(1024) 
-    
+
     json_obj = json.loads(data)     # object that gets the client data 
     command = json_obj["command"]   # gets client command
     username = json_obj["username"] # gets client username
+
+    if (len(userlist) > 0):
+        print("Users in message board:",userlist)
 
     if data:
         # TODO delete
