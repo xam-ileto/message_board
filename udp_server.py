@@ -22,8 +22,6 @@ while True:
     username = json_obj["username"] # gets client username
 
     if data:
-        # TODO delete
-        print(json_obj)
         # For message commands
         if (command == "msg"):
             user_msg = json_obj["message"]       

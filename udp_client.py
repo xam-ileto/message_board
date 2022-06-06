@@ -48,10 +48,6 @@ data, server = sock.recvfrom(1024)
 json_returned1 = json.loads(data)
 ret_code = json_returned1["code_no"]
 
-# TODO delete
-print(json_returned1)
-print_output(json_initial1["command"], json_returned1["code_no"])
-
 # exit program if register was unsuccessful
 if (ret_code != 401):
     exit(0)
@@ -74,10 +70,6 @@ while(msg != "bye"): # keep posting messages
     
     data, server = sock.recvfrom(1024)
     json_returned2 = json.loads(data)
-
-    # TODO delete
-    print(json_returned2)
-    print_output(json_initial2["command"], json_returned2["code_no"])
     
     msg = input("Enter message: ")
 
@@ -94,10 +86,5 @@ sent = sock.sendto(bytes(json_sent3,"utf-8"), (server_host,dest_port))
 
 data, server = sock.recvfrom(1024)
 json_returned3 = json.loads(data)
-
-# TODO delete
-print(json_returned3)
-print_output(json_initial3["command"], json_returned3["code_no"])
-        
 
 sock.close()
