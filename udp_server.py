@@ -21,9 +21,6 @@ while True:
     command = json_obj["command"]   # gets client command
     username = json_obj["username"] # gets client username
 
-    if (len(userlist) > 0):
-        print("Users in message board:",userlist)
-
     if data:
         # TODO delete
         print(json_obj)
