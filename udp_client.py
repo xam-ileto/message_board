@@ -56,28 +56,6 @@ print_output(json_initial1["command"], json_returned1["code_no"])
 if (ret_code != 401):
     exit(0)
 
-# repeat while unregistered
-# while (ret_code != 401):
-#     username = input("Enter preferred username: ")
-
-#     # register again
-#     json_initial1 = {
-#             "command": "register",
-#             "username": username
-#         }
-    
-#     json_sent1 = json.dumps(json_initial1)
-    
-#     # send data to server
-#     sent = sock.sendto(bytes(json_sent1,"utf-8"), (server_host,dest_port))
-    
-#     # receive server response
-#     data, server = sock.recvfrom(1024)
-#     json_returned1 = json.loads(data)
-#     ret_code = json_returned1["code_no"]
-    
-#     print_output(json_initial1["command"], json_returned1["code_no"])
-
 
 # SEND MSG/ DEREGISTER USER
 msg = input("Enter message: ")
