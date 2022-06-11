@@ -58,7 +58,7 @@ if (ret_code != 401):
 # SEND MSG/ DEREGISTER USER
 msg = input("Enter message: ")
 
-while(msg != "bye"): # keep posting messages
+while(True): # keep posting messages
     json_initial2 = {
         "command": "msg",
         "username": username,
@@ -75,9 +75,13 @@ while(msg != "bye"): # keep posting messages
 
     print_output(json_initial2["command"], json_returned2["code_no"])
     
+    # if user types bye, exit loop then deregister
+    if (msg == "bye"):
+        break
+    
     msg = input("Enter message: ")
 
-# DEREGISTER
+# then DEREGISTER
 json_initial3 = {
         "command": "deregister",
         "username": username,
