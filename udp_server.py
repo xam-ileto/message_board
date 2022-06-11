@@ -82,7 +82,6 @@ while True:
                 else: # Command Execute Success!
                     userlist.remove(username)
                     
-                    print("from " + username + ": bye")
                     print("User " + username + " exiting...")
                     print("Users in message board: ", end="")
                     print(userlist)
